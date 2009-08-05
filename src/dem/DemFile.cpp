@@ -36,7 +36,6 @@ namespace dem
 {
 
 
-
 DemFile::DemFile(const boost::filesystem::path & demFile) :
 	file_(demFile), sectionA_(0)
 {
@@ -56,8 +55,6 @@ DemFile::DemFile(const boost::filesystem::path & demFile) :
 	ps_.yIncrement_ = sectionA_->yResolution();
 	ps_.xNumber_ = sectionA_->colsInProfile();
 	ps_.yNumber_ = 1 + (p.corners().at(1).y() - ps_.startY_) / ps_.xIncrement_;
-
-
 	ps_.projDefinition_ = const_cast<char*>(projDefinition_.c_str());
 
 	area_ = calculateArea_();
@@ -197,13 +194,6 @@ std::string DemFile::calculateProjDefinition_() const
 	else
 		throw InvalidProjection("Can only handle UTM projection");
 
-	int unit = sectionA_->planimetricUnit();
-	if ( unit == 1 )
-		projDef << "+units=ft ";
-	else if ( unit == 2 )
-		projDef << "+units=m ";
-	else throw InvalidProjection("Cannot handle unit " + boost::lexical_cast<std::string>(unit));
-
 	int horizontalDatum = sectionA_->horizontalDatum();
 	switch ( horizontalDatum )
 	{
@@ -215,7 +205,7 @@ std::string DemFile::calculateProjDefinition_() const
 		//projDef << "+datum=WGS72 ";
 		break;
 	case 3:
-		projDef << "+datum=WGS84 ";
+		projDef << "+ellps=WGS84 +datum=WGS84 ";
 		break;
 	case 4:
 		projDef << "+datum=NAD83 ";
@@ -227,6 +217,14 @@ std::string DemFile::calculateProjDefinition_() const
 	default:
 		throw InvalidProjection("Unknown horizontal datum: " + boost::lexical_cast<std::string>(horizontalDatum));
 	}
+
+	int unit = sectionA_->planimetricUnit();
+	if ( unit == 1 )
+		projDef << "+units=ft ";
+	else if ( unit == 2 )
+		projDef << "+units=m ";
+	else
+		throw InvalidProjection("Cannot handle unit " + boost::lexical_cast<std::string>(unit));
 
 	projDef << "+no_defs";
 
