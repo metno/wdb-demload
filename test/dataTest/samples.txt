@@ -1,0 +1,27 @@
+# Stedsnavn			Plassering			Høyde
+
+Honningsvåg			70,9821 25,9704		5
+Galdhøpiggen 		61,6364 8,3132 		2469
+Blindern 			59,9406 10,7231 	89
+
+Skjærhalden 		59,0253 11,0368 	3
+Herføl 				58,9937 11,0503 	20
+Bergen 				60,3930 5,3242 		6
+
+Sortland 			68,6949 15,4162 	6
+Kristiansand 		58,1467 7,9956 		7
+Volda 				62,1476 6,0741 		30
+
+Elverum 			60,8819 11,5623 	187
+Røst 				67,5187 12,1049 	6
+Strømtangen 		59,1511 10,8294 	10
+
+Arendal 			58,4615 8,7725 		20
+Mandal				58,0274 7,4534		20
+Bromma				60,4831 9,1922		220
+
+Reine				67,9336 13,0885		3
+Møysalen			68,5260 15,4521		1262
+Grense_Jakobselv	69,7752 30,8313		15
+
+Tromsø				69,6496 18,9570		16
