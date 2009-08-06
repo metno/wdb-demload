@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
-import pg
 
 class Wdb:
     def __init__(self, database = 'wdb'):
+        import pg
         self.database = pg.connect(database)
         self.database.query("SELECT wci.begin('vegardb')")
         
@@ -19,7 +19,6 @@ class Wdb:
         return ret
         
 def format(s, spaces):
-    
     return s + (spaces-len(s))*' '
 
 class ValidatedData:
@@ -38,9 +37,7 @@ class ValidatedData:
         print str(self) + str(fetchedData)
 
 def processFile(fileToProcess, database):
-
     print 'STED              YR.NO       WDB'
-    
     f = file(fileToProcess)
     for line in f:
         line = line.strip()
@@ -48,6 +45,7 @@ def processFile(fileToProcess, database):
             line = line.replace(',', '.')
             valid = ValidatedData(line)
             valid.validate(database.read(valid.latitude, valid.longitude))
+
 
 if __name__ == '__main__':
     import sys
