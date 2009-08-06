@@ -54,7 +54,6 @@ SectionB::SectionB(std::ifstream & s)
 
 	//reallign stream here
 	std::istream::streampos pos = s.tellg();
-	static int i = 0;
 	s.seekg(1024 - (pos % 1024), std::istream::cur);
 }
 
