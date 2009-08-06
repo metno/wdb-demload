@@ -26,7 +26,7 @@
  MA  02110-1301, USA
 */
 
-#include <dem/DemFile.h>
+#include "dem/DemFile.h"
 #include <wdb/LoaderConfiguration.h>
 #include <wdb/LoaderDatabaseConnection.h>
 #include <wdbLogHandler.h>
