@@ -27,7 +27,7 @@
 */
 
 #include "dem/DemFile.h"
-#include <wdb/LoaderConfiguration.h>
+#include "configuration/DemLoadConfiguration.h"
 #include <wdb/LoaderDatabaseConnection.h>
 #include <wdbLogHandler.h>
 #include <wdbException.h>
@@ -46,14 +46,12 @@ void printInfo(const dem::DemFile & topography)
 	cout << topography.area().wkt();
 }
 
-typedef wdb::load::LoaderConfiguration DemLoadConfiguration;
-
 std::ostream & version(std::ostream & s)
 {
 	return s << "demLoad 0.1.0" << endl;
 }
 
-std::ostream & help(std::ostream & s, const DemLoadConfiguration & conf)
+std::ostream & help(std::ostream & s, const wdb::DemLoadConfiguration & conf)
 {
 	version(s);
 	s << '\n';
@@ -67,7 +65,7 @@ std::ostream & help(std::ostream & s, const DemLoadConfiguration & conf)
 
 int main(int argc, char ** argv)
 {
-	DemLoadConfiguration conf("demload");
+	wdb::DemLoadConfiguration conf("demload");
 	conf.parse(argc, argv);
 
 	if ( conf.general().help )
@@ -85,7 +83,7 @@ int main(int argc, char ** argv)
     WDB_LOG & log = WDB_LOG::getInstance( "wdb.demLoad.main" );
     log.debug( "Starting demLoad" );
 
-	wdb::load::LoaderDatabaseConnection db(conf.database().pqDatabaseConnection(), "demload");
+	wdb::load::LoaderDatabaseConnection db(conf);
 
     const std::vector<std::string> & file = conf.input().file;
 	std::vector<boost::filesystem::path> files;
@@ -104,21 +102,31 @@ int main(int argc, char ** argv)
 		}
 		catch ( wdb::empty_result & )
 		{
-			placeName = it->string();
-			db.addPlaceDefinition(placeName,f.xNumber(), f.yNumber(), f.xIncrement(), f.yIncrement(), f.startX(), f.startY(), f.projDefinition());
+			if ( conf.loading().placeName.empty() )
+				placeName = it->string();
+			else
+				placeName = conf.loading().placeName;
+			db.addPlaceDefinition(placeName, f.xNumber(), f.yNumber(), f.xIncrement(), f.yIncrement(), f.startX(), f.startY(), f.projDefinition());
 		}
-		db.write(
-				& f.data()[0],
-				f.data().size(),
-				conf.loading().dataProvider,
-				placeName,
-				"2009-06-24 06:00:00Z",
-				"2009-06-24 06:00:00Z",
-				"2109-06-24 06:00:00Z",
-				"model topography distance",
-				"height above mean sea level distance",
-				0, 0,
-				conf.loading().dataVersion,
-				conf.loading().confidenceCode);
+		try
+		{
+			db.write(
+					& f.data()[0],
+					f.data().size(),
+					"demLoad", // will be ignored and overridden by whatever is in config.
+					placeName,
+					"infinity",
+					"-infinity",  // SJEKK AT DISSE VIRKER
+					"infinity",
+					"model topography distance",
+					"height above mean sea level distance",
+					0, 0,
+					0,
+					0);
+		}
+		catch ( std::exception & e )
+		{
+			std::cout << "Error when loading file " << it->native_file_string() << ": " << e.what() << std::endl;
+		}
 	}
 }
