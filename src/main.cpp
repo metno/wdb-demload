@@ -113,10 +113,10 @@ int main(int argc, char ** argv)
 			db.write(
 					& f.data()[0],
 					f.data().size(),
-					"demLoad", // will be ignored and overridden by whatever is in config.
+					"demload", // will be ignored and overridden by whatever is in config.
 					placeName,
 					"infinity",
-					"-infinity",  // SJEKK AT DISSE VIRKER
+					"-infinity",
 					"infinity",
 					"model topography distance",
 					"height above mean sea level distance",
