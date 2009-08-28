@@ -2,11 +2,11 @@ Source: demload
 Section: science
 Priority: extra
 Maintainer: Vegard Bønes <wdb@met.no>
-Build-Depends: debhelper (>= 5), autotools-dev, wdbloaderbase
+Build-Depends: debhelper (>= 5), autotools-dev, libwdbload1
 Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.7.2
 
 Package: demload
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, wdbloaderbase
+Depends: ${shlibs:Depends}, ${misc:Depends}, libwdbload1
 Description: Load USGS DEM topography files into wdb
