@@ -10,3 +10,5 @@ Package: demload
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, libwdbload1
 Description: Load USGS DEM topography files into wdb
+ This package is intended solely for loading 25 meter topography files from 
+ statkart into wdb. Any other loadings may fail.
