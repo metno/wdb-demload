@@ -5,8 +5,8 @@ bin_PROGRAMS = demLoad
 include src/demLoad.mk
 include doc/demLoad.mk
 
-demLoad_CPPFLAGS = -I$(top_srcdir)/src $(libwdbLoad_CFLAGS)
-demLoad_LDADD = $(libwdbLoad_LIBS) -lwdbLog
+demLoad_CPPFLAGS = -I$(top_srcdir)/src $(wdb_CFLAGS)
+demLoad_LDADD = $(wdb_LIBS) 
 
 include config/debian.mk
 
