@@ -31,6 +31,7 @@
 #include <wdb/LoaderDatabaseConnection.h>
 #include <wdbLogHandler.h>
 #include <wdbException.h>
+#include <boost/filesystem.hpp>
 #include <iostream>
 
 
@@ -103,7 +104,7 @@ int main(int argc, char ** argv)
 		catch ( wdb::empty_result & )
 		{
 			if ( conf.loading().placeName.empty() )
-				placeName = it->string();
+				placeName = boost::filesystem::basename(* it);
 			else
 				placeName = conf.loading().placeName;
 			db.addPlaceDefinition(placeName, f.xNumber(), f.yNumber(), f.xIncrement(), f.yIncrement(), f.startX(), f.startY(), f.projDefinition());
