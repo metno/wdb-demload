@@ -107,7 +107,7 @@ int main(int argc, char ** argv)
 				placeName = boost::filesystem::basename(* it);
 			else
 				placeName = conf.loading().placeName;
-			db.addPlaceDefinition(placeName, f.xNumber(), f.yNumber(), f.xIncrement(), f.yIncrement(), f.startX(), f.startY(), f.projDefinition());
+			placeName = db.addPlaceDefinition(placeName, f.xNumber(), f.yNumber(), f.xIncrement(), f.yIncrement(), f.startX(), f.startY(), f.projDefinition());
 		}
 		try
 		{
