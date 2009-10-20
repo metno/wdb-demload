@@ -1,6 +1,8 @@
 ACLOCAL_AMFLAGS = -I config
 
-bin_PROGRAMS = demLoad
+wdblibdir = $(libdir)/wdb
+
+wdblib_PROGRAMS = demLoad
 
 include src/demLoad.mk
 include doc/demLoad.mk
