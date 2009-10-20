@@ -31,6 +31,7 @@
 #include "internal/SectionB.h"
 #include <deque>
 #include <iostream>
+#include <cmath>
 
 namespace dem
 {
@@ -82,8 +83,6 @@ const DemFile::ValueContainer & DemFile::data() const
 		const int cols = sectionA_->colsInProfile();
 		const int noOfEntries = rows * cols;
 
-		ValueContainer d;
-
 		typedef boost::shared_ptr<dem::internal::SectionB> SectionBPtr;
 		typedef std::vector<SectionBPtr> SectionBList;
 		SectionBList columns;
@@ -100,9 +99,8 @@ const DemFile::ValueContainer & DemFile::data() const
 			if ( thisY < lowestY )
 				lowestY = thisY;
 		}
-		//std::cout << originalGrid << ": lowest y=" << lowestY << std::endl;
 
-			// Fill in data in front of columns
+		// Fill in data in front of columns
 		int minMissing = std::numeric_limits<int>::max();
 		int count = 0;
 		for ( SectionBList::iterator it = columns.begin(); it != columns.end(); ++ it )
@@ -114,17 +112,13 @@ const DemFile::ValueContainer & DemFile::data() const
 				if ( missingPointsInFront < minMissing )
 					minMissing = missingPointsInFront;
 				++ count;
-
-				////std::cout << startPoint.y() << " - " << lowestY << " = " << missingPointsInFront << std::endl;
 			}
 
 			dem::internal::SectionB::ElevationList & elevations = (*it)->elevations_;
 
 			size_t noOfPointsBeforeData = (startPoint.y() - startY()) / yIncrement();
-			//size_t noOfPointsBeforeData = 0; // Gi denne en ordentlig verdi!!
 			elevations.insert(elevations.begin(), noOfPointsBeforeData, NO_VALUE);
 		}
-		//std::cout << count << "(" << columns.size() << "):\t" << minMissing << std::endl;
 
 		// Find longest column
 		dem::internal::SectionB::ElevationList::size_type longestColumn = 0;
@@ -134,20 +128,14 @@ const DemFile::ValueContainer & DemFile::data() const
 			if ( length > longestColumn )
 				longestColumn = length;
 		}
-		//std::cout << "Longest column: " << longestColumn << std::endl;
 
 		// Append to end of each column, so they become of the same length
 		for ( SectionBList::iterator it = columns.begin(); it != columns.end(); ++ it )
 		{
 			dem::internal::SectionB::ElevationList & elevations = (*it)->elevations_;
 			size_t noOfPointsAfterData = longestColumn - elevations.size();
-			////std::cout << "Column missing " << noOfPointsAfterData << " elements at end" << std::endl;
 			if ( noOfPointsAfterData != 0)
-			{
-				//std::cout << elevations.size();
 				elevations.insert(elevations.end(), noOfPointsAfterData, NO_VALUE);
-				//std::cout << " - " << elevations.size() << " (inserted " << noOfPointsAfterData << " elements)" << std::endl;
-			}
 		}
 
 		// Fill in data structure
@@ -156,28 +144,9 @@ const DemFile::ValueContainer & DemFile::data() const
 			for ( SectionBList::iterator it = columns.begin(); it != columns.end(); ++ it )
 				data_.push_back((*it)->elevations()[i]);
 
-//		for ( int i = 0; i < noOfEntries; ++ i)
-//		{
-//			dem::internal::SectionB b(file_);
-//			const std::vector<float> & elevations = b.elevations();
-//
-//			d.insert(d.end(), elevations.begin(), elevations.end());
-//		}
-//
-//		// Reorganize data so it follows rows instead of columns
-//		ValueContainer::size_type idx = 0;
-//		while ( data_.size() < d.size() )
-//		{
-//			data_.push_back(d[idx]);
-//			idx += cols;
-//			if ( idx >= d.size() )
-//			{
-//				idx -= d.size();
-//				++ idx;
-//			}
-//		}
+		// Change any explicitly missing values to NO_VAULE
+		std::replace(data_.begin(), data_.end(), missingValue_, NO_VALUE);
 	}
-	//std::cout << "Size: " << data_.size() << " (" << ps_.xNumber_ << " x " << ps_.yNumber_ << ")" << std::endl;
 	return data_;
 }
 
