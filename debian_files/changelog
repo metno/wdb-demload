@@ -1,4 +1,4 @@
-demload (0.9.4-2ubuntu1) hardy; urgency=low
+demload (0.9.5-1) hardy; urgency=low
 
   * added wdb-terrain-norway-25m to debian build
 
