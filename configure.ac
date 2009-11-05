@@ -3,7 +3,6 @@
 
 AC_PREREQ(2.61)
 AC_INIT(demLoad, 0.9.5, wdb@met.no)
-AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADER([config.h])
 
@@ -19,8 +18,9 @@ AC_PROG_LN_S
 
 
 # Checks for libraries.
-#PKG_CHECK_MODULES(libwdbLoad, libwdbLoad)
+WDB_CHECK
 WDB_LOADERBASE_CHECK
+
 
 WDB_BOOST_CHECK(1.33.1)
 
