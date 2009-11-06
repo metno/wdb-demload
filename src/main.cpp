@@ -63,6 +63,13 @@ std::ostream & help(std::ostream & s, const wdb::DemLoadConfiguration & conf)
 	return s;
 }
 
+std::ostream & list(std::ostream & s, const dem::DemFile & f)
+{
+	s << "Topography data for area " << f.area() << "\n";
+	s << "Increment distance " << f.xIncrement() << ", " << f.yIncrement() << "\n";
+	s << "Proj definition " << f.projDefinition() << endl;
+	return s << endl;
+}
 
 int main(int argc, char ** argv)
 {
@@ -90,44 +97,53 @@ int main(int argc, char ** argv)
 	std::vector<boost::filesystem::path> files;
 	copy(file.begin(), file.end(), back_inserter(files));
 
+	bool listInsteadOfLoad = conf.output().list;
+
 	for ( std::vector<boost::filesystem::path>::const_iterator it = files.begin(); it != files.end(); ++ it )
 	{
 		log.infoStream() << "loading file " << it->file_string();
 
 		dem::DemFile f(* it);
 
-		std::string placeName;
-		try
+		if ( listInsteadOfLoad )
 		{
-			placeName = db.getPlaceName(f.xNumber(), f.yNumber(), f.xIncrement(), f.yIncrement(), f.startX(), f.startY(), f.projDefinition());
+			list(cout , f);
 		}
-		catch ( wdb::empty_result & )
+		else
 		{
-			if ( conf.loading().placeName.empty() )
-				placeName = boost::filesystem::basename(* it);
-			else
-				placeName = conf.loading().placeName;
-			placeName = db.addPlaceDefinition(placeName, f.xNumber(), f.yNumber(), f.xIncrement(), f.yIncrement(), f.startX(), f.startY(), f.projDefinition());
-		}
-		try
-		{
-			db.write(
-					& f.data()[0],
-					f.data().size(),
-					"demload", // will be ignored and overridden by whatever is in config.
-					placeName,
-					"infinity",
-					"-infinity",
-					"infinity",
-					"model topography distance",
-					"height above mean sea level distance",
-					0, 0,
-					0,
-					0);
-		}
-		catch ( std::exception & e )
-		{
-			std::cout << "Error when loading file " << it->native_file_string() << ": " << e.what() << std::endl;
+			std::string placeName;
+			try
+			{
+				placeName = db.getPlaceName(f.xNumber(), f.yNumber(), f.xIncrement(), f.yIncrement(), f.startX(), f.startY(), f.projDefinition());
+			}
+			catch ( wdb::empty_result & )
+			{
+				if ( conf.loading().placeName.empty() )
+					placeName = boost::filesystem::basename(* it);
+				else
+					placeName = conf.loading().placeName;
+				placeName = db.addPlaceDefinition(placeName, f.xNumber(), f.yNumber(), f.xIncrement(), f.yIncrement(), f.startX(), f.startY(), f.projDefinition());
+			}
+			try
+			{
+				db.write(
+						& f.data()[0],
+						f.data().size(),
+						"demload", // will be ignored and overridden by whatever is in config.
+						placeName,
+						"infinity",
+						"-infinity",
+						"infinity",
+						"model topography distance",
+						"height above mean sea level distance",
+						0, 0,
+						0,
+						0);
+			}
+			catch ( std::exception & e )
+			{
+				std::cout << "Error when loading file " << it->native_file_string() << ": " << e.what() << std::endl;
+			}
 		}
 	}
 }
