@@ -9,11 +9,18 @@ include doc/demLoad.mk
 
 demLoad_CPPFLAGS = -I$(top_srcdir)/src $(AM_CPPFLAGS)
 
+foo:
+	 @echo DO_CREATE_USER = $(DO_CREATE_USER)
+
 install-data-hook:
-	$(WDB_ADMINISTRATION) createuser demload write
+	if [ $(DO_CREATE_USER) = true ]; then \
+		$(WDB_ADMINISTRATION) createuser demload write; \
+	fi
 	
 uninstall-hook:
-	$(WDB_ADMINISTRATION) dropuser demload
+	if [ $(DO_CREATE_USER) = true ]; then \
+		$(WDB_ADMINISTRATION) dropuser demload; \
+	fi
 
 admin:
 	@echo WDB_ADMINISTRATION = $(WDB_ADMINISTRATION)

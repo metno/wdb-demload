@@ -35,6 +35,7 @@ configure-stamp:
 	dh_testdir
 	# Add here commands to configure the package.
 	./configure $(confflags) \
+		--disable-create-user \
 		--prefix=/usr --sysconfdir=/etc --localstatedir=/var
 	touch configure-stamp
 
