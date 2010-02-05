@@ -1,3 +1,9 @@
+demload (0.9.6-4) hardy; urgency=low
+
+  * final build
+
+ -- Vegard B�nes <vegardb@met.no>  Fri, 05 Feb 2010 15:04:54 +0000
+
 demload (0.9.5-1) hardy; urgency=low
 
   * added wdb-terrain-norway-25m to debian build
