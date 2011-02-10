@@ -19,7 +19,7 @@ set -e
 
 case "$1" in
     configure)
-		sudo -u wdb /usr/bin/wdb createuser demload write
+		su wdb -c "/usr/bin/wdb createuser demload write"
     ;;
 
     abort-upgrade)
