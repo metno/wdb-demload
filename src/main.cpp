@@ -134,8 +134,8 @@ int main(int argc, char ** argv)
 						"infinity",
 						"-infinity",
 						"infinity",
-						"model topography distance",
-						"height above mean sea level distance",
+						"altitude",
+						"height above reference ellipsoid",
 						0, 0,
 						0,
 						0);
