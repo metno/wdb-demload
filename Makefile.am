@@ -28,3 +28,4 @@ admin:
 
 include mk/debian.mk
 
+debian: common-debian
