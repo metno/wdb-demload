@@ -25,7 +25,9 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  MA  02110-1301, USA
 */
-
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 #include "dem/DemFile.h"
 #include "configuration/DemLoadConfiguration.h"
 #include <wdb/LoaderDatabaseConnection.h>
@@ -49,7 +51,8 @@ void printInfo(const dem::DemFile & topography)
 
 std::ostream & version(std::ostream & s)
 {
-    out << PACKAGE_STRING << endl;
+    s << PACKAGE_STRING << endl;
+    return s;
 }
 
 std::ostream & help(std::ostream & s, const wdb::DemLoadConfiguration & conf)
