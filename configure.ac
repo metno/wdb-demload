@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.61)
-AC_INIT(demLoad, 0.9.8, wdb@met.no)
+AC_INIT(demLoad, 1.0.0, wdb@met.no)
 AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADER([config.h])
 AC_CONFIG_MACRO_DIR([m4])
@@ -27,7 +27,7 @@ WDB_USER_CREATE
 WDB_BOOST_CHECK(1.33.1)
 
 # LOG4CPP
-WDB_LOG4CPP_CHECK(0.3.5rc3)
+WDB_LOG4CPP_CHECK(1.0)
 
 WDB_PROJ_CHECK
 
