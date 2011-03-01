@@ -49,7 +49,7 @@ void printInfo(const dem::DemFile & topography)
 
 std::ostream & version(std::ostream & s)
 {
-	return s << "demLoad 0.1.0" << endl;
+    out << PACKAGE_STRING << endl;
 }
 
 std::ostream & help(std::ostream & s, const wdb::DemLoadConfiguration & conf)

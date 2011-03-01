@@ -19,7 +19,8 @@ Description: Load USGS DEM topography files into wdb
 
 Package: wdb-terrain-norway-25m
 Architecture: any
-Depends: demload,
+Depends: ${misc:Depends},
+ demload,
  metno-data-terrain-norway-25m
 Description: Load topography of 25 meter resolution into wdb - met.no-internal package
  This package installs topography .dem files, through the 
