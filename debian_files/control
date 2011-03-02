@@ -1,18 +1,18 @@
-Source: demload  
+Source: wdb-demload  
 Section: science
 Priority: extra
 Maintainer: Vegard Bønes <wdb@met.no>
 Build-Depends: debhelper (>= 5),
  autotools-dev,
- libwdbload1
+ wdb-libwdbload1
 Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.9.1
 
-Package: demload
+Package: wdb-demload
 Architecture: any
 Depends: ${shlibs:Depends},
  ${misc:Depends},
- libwdbload1
+ wdb-libwdbload1
 Description: Load USGS DEM topography files into wdb
  This package is intended solely for loading 25 meter topography files from 
  statkart into wdb. Any other loadings may fail.
@@ -20,7 +20,7 @@ Description: Load USGS DEM topography files into wdb
 Package: wdb-terrain-norway-25m
 Architecture: any
 Depends: ${misc:Depends},
- demload,
+ wdb-demload,
  metno-data-terrain-norway-25m
 Description: Load topography of 25 meter resolution into wdb - met.no-internal package
  This package installs topography .dem files, through the 
