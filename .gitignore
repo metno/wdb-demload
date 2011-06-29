@@ -10,3 +10,5 @@
 /install-sh
 /missing
 /aclocal.m4
+/.cproject
+/.project

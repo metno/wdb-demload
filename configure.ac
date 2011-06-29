@@ -5,7 +5,7 @@ AC_PREREQ(2.61)
 AC_INIT(demLoad, 1.0.0, wdb@met.no)
 AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADER([config.h])
-AC_CONFIG_MACRO_DIR([m4])
+AC_CONFIG_MACRO_DIR([../wdb-config/m4])
 
 AC_PROG_LIBTOOL
 
