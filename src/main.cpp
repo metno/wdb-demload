@@ -66,7 +66,7 @@ std::ostream & help(std::ostream & s, const wdb::DemLoadConfiguration & conf)
 	return s;
 }
 
-std::ostream & list(std::ostream & s, const dem::DemFile & f)
+std::ostream & listInfo(std::ostream & s, const dem::DemFile & f)
 {
 	s << "Topography data for area " << f.area() << "\n";
 	s << "Increment distance " << f.xIncrement() << ", " << f.yIncrement() << "\n";
@@ -104,13 +104,13 @@ int main(int argc, char ** argv)
 
 	for ( std::vector<boost::filesystem::path>::const_iterator it = files.begin(); it != files.end(); ++ it )
 	{
-		log.infoStream() << "loading file " << it->file_string();
+		log.infoStream() << "loading file " << it->string();
 
 		dem::DemFile f(* it);
 
 		if ( listInsteadOfLoad )
 		{
-			list(cout , f);
+			listInfo(cout , f);
 		}
 		else
 		{
@@ -145,7 +145,7 @@ int main(int argc, char ** argv)
 			}
 			catch ( std::exception & e )
 			{
-				std::cout << "Error when loading file " << it->native_file_string() << ": " << e.what() << std::endl;
+				std::cout << "Error when loading file " << it->string() << ": " << e.what() << std::endl;
 			}
 		}
 	}
