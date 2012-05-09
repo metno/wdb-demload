@@ -33,6 +33,7 @@
 #include <geometry/Polygon.h>
 #include <PlaceSpecification.h>
 #include <boost/lexical_cast.hpp>
+#include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/noncopyable.hpp>
