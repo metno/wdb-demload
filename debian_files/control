@@ -8,7 +8,7 @@ Build-Depends: debhelper (>= 5),
  cdbs,
  libwdbload2
 Build-Conflicts: autoconf2.13, automake1.4
-Standards-Version: 3.9.1
+Standards-Version: 3.9.3
 
 Package: wdb-demload
 Architecture: any
