@@ -2,9 +2,9 @@ wdb-demload (1.1.0-1) precise; urgency=high
 
   * Updated debian package to precise pangoling.
   
-  * Use cdbs
+  * Use cdbs for debian packagaing.
 
- -- Michael Akinde <wdb@met.no>  Wed, 09 Mar 2011 12:00:00 +0000
+ -- Michael Akinde <wdb@met.no>  Wed, 09 May 2012 15:00:00 +0000
 
 wdb-demload (1.0.0-1) lucid; urgency=high
 
