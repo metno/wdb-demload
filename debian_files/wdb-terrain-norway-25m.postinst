@@ -20,7 +20,7 @@ set -e
 case "$1" in
     configure)
 	for DEM_FILE in /usr/share/metno-data/terrain-norway-25m/sone3?/*.dem; do
-		su wdb -c "/usr/lib/wdb/demLoad --dataprovider 'statkart.no' --loadPlaceDefinition $DEM_FILE"
+		su wdb -c "/usr/lib/wdb/demLoad --dataprovider 'statkart.no' --referencetime '2007-09-19T00:00:00+00' --loadPlaceDefinition $DEM_FILE"
 	done
     ;;
 
