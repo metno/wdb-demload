@@ -6,7 +6,7 @@ Uploaders: Michael O. Akinde <michael.akinde@met.no>
 Build-Depends: debhelper (>= 5),
  autotools-dev,
  cdbs,
- libwdbload2
+ libwdbload2 (>= 2.0.2)
 Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.9.3
 
@@ -14,7 +14,7 @@ Package: wdb-demload
 Architecture: any
 Depends: ${shlibs:Depends},
  ${misc:Depends},
- libwdbload2
+ libwdbload2 (>= 2.0.2)
 Description: Load USGS DEM topography files into wdb
  This package is intended solely for loading 25 meter topography files from 
  statkart into wdb. Any other loadings may fail.
