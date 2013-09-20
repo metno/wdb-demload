@@ -3,7 +3,7 @@ Section: science
 Priority: extra
 Maintainer: WDB Group, Meteorologisk institutt <wdb@met.no>
 Uploaders: Michael O. Akinde <michael.akinde@met.no>
-Build-Depends: debhelper (>= 5),
+Build-Depends: debhelper (>= 7),
  autotools-dev,
  cdbs,
  libwdbload-dev
@@ -13,8 +13,7 @@ Standards-Version: 3.9.3
 Package: wdb-demload-1.2
 Architecture: any
 Depends: ${shlibs:Depends},
- ${misc:Depends},
- libwdbload3
+ ${misc:Depends}
 Provides: wdb-demload
 Description: Load USGS DEM topography files into wdb
  This package is intended solely for loading 25 meter topography files from 
