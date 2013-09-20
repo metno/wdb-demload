@@ -6,7 +6,7 @@ Uploaders: Michael O. Akinde <michael.akinde@met.no>
 Build-Depends: debhelper (>= 5),
  autotools-dev,
  cdbs,
- libwdbload3 (>= 2.1.0)
+ libwdbload-dev
 Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.9.3
 
@@ -14,7 +14,7 @@ Package: wdb-demload-1.2
 Architecture: any
 Depends: ${shlibs:Depends},
  ${misc:Depends},
- libwdbload3 (>= 2.1.0)
+ libwdbload3
 Provides: wdb-demload
 Description: Load USGS DEM topography files into wdb
  This package is intended solely for loading 25 meter topography files from 
