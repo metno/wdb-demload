@@ -1,3 +1,9 @@
+wdb-demload (1.2.0-2) lucid; urgency=low
+
+  * added Conflicts declaration to control file
+
+ -- Michael Akinde <wdb@met.no>  Thu, 21 Nov 2013 13:35:45 +0100
+
 wdb-demload (1.2.0-1) precise; urgency=low
 
   * Require libwdbload3 version 2.1.0 or latter.
