@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.61)
-AC_INIT(demLoad, 1.2.0, wdb@met.no)
+AC_INIT(demLoad, 1.2.1, wdb@met.no)
 AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADER([config.h])
 AC_CONFIG_MACRO_DIR([config/m4])
