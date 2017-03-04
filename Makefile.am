@@ -14,8 +14,12 @@ wdblibdir =				$(libdir)/wdb
 # Setting Targets
 wdblib_PROGRAMS = demLoad
 
-demLoad_CPPFLAGS = -I$(top_srcdir)/src $(AM_CPPFLAGS)
-	
+demLoad_CPPFLAGS = -I$(top_srcdir)/src $(wdb_CFLAGS) $(BOOST_CPPFLAGS) $(AM_CPPFLAGS)
+demLoad_LDADD=\
+	$(wdb_LIBS) -llog4cpp -lboost_date_time -lboost_filesystem \
+        -lboost_program_options -lboost_system -lwdbLoad \
+        -lwdbConfig -lwdbProj -lwdbExcept -lwdbLog -lwdbMath -lproj
+
 EXTRA_DIST =
 CLEANFILES =
 
