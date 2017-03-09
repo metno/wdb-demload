@@ -174,7 +174,7 @@ std::string DemFile::calculateProjDefinition_() const
 		//projDef << "+datum=WGS72 ";
 		break;
 	case 3:
-		projDef << "+ellps=WGS84 +datum=WGS84 ";
+		projDef << "+datum=WGS84 ";
 		break;
 	case 4:
 		projDef << "+datum=NAD83 ";

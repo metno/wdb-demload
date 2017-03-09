@@ -1,3 +1,10 @@
+wdb-demload (1.2.3-1) UNRELEASED; urgency=medium
+
+  * new version
+  * new version
+
+ -- Michael Akinde <wdb@met.no>  Thu, 09 Mar 2017 09:41:04 +0100
+
 wdb-demload (1.2.1-1) precise; urgency=low
 
   * new version, with libwdbload4

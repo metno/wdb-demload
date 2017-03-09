@@ -119,7 +119,7 @@ int main(int argc, char ** argv)
 			{
 				placeName = db.getPlaceName(f.xNumber(), f.yNumber(), f.xIncrement(), f.yIncrement(), f.startX(), f.startY(), f.projDefinition());
 			}
-			catch ( wdb::empty_result & )
+			catch ( std::exception & )
 			{
 				if ( conf.loading().placeName.empty() )
 					placeName = boost::filesystem::basename(* it);
